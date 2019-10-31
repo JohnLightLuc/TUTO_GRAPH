@@ -5,4 +5,4 @@ from .models import Population
 
 @admin.register(Population)
 class PopulationAdmin(admin.ModelAdmin):
-    list_display = ('nom', 'nombre_hbitants')
+    list_display = ('nom', 'nombre_hbitants','pourcentage')

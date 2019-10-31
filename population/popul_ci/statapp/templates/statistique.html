@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Statitique</title>
+    <script src="/static/echarts.min.js"></script>
+</head>
+<body>
+    <div class="container text-center">
+        <div class="text-center" style='text-decoration: underline; '>
+            <h1> ETUDE STATISTIQUE </h1>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Histogramme</h2>
+                <div id="histo" style="width:100%; height:400px;">
+                </div>
+    
+            </div>
+            <div class="col-md-6">
+                <h2>STATISTIQUE</h2>
+                <table class="table table-bordered table-dark">
+                    <thead>
+                        <tr>
+                        <th scope="col">Max</th>
+                        <th scope="col">
+                        {{ maxi.nombre_hbitants__max }}
+                        </th>
+                        <th scope="col">Last</th>
+                        <th scope="col" >Soit  ..%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td></td>
+                          <td>Otto</td>
+                          <td>Otto</td>
+                          <td>soit ..%</td>
+                        </tr>
+                        <tr>
+                          <td>Jacob</td>
+                          <td colspan='3'>Thornton</td>
+                          
+                        </tr>
+                    </tbody>
+                    </table>
+                
+            </div>
+        </div>
+
+    </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        // based on prepared DOM, initialize echarts instance
+        
+        var myHisto = echarts.init(document.getElementById('histo'));
+       
+        // specify chart configuration item and data
+      
+        //option 
+        var option = {
+            xAxis: {
+                type: 'category',
+                data: [
+                    {% for item in pops %}
+                    "{{ item.nom }}",
+                    {% endfor %}
+                    ]
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [
+                    {% for item in pops %}
+                    "{{ item.nombre_hbitants }}",
+                    {% endfor %}
+                ],
+                type: 'bar'
+            }]
+        };
+
+
+
+
+
+        // use configuration item and data specified to show chart
+        
+        myHisto.setOption(option)
+    </script>
+</body>
+</html>

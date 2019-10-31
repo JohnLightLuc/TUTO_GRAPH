@@ -75,7 +75,11 @@
             legend: {
                 orient: 'vertical',
                 left: 'left',
-                data: ['Autre','Bete','Dioula','Baoule','Lobi']
+                data: [
+                    {% for item in pops %}
+                        "{{ item.nom }}",
+                    {% endfor %}
+                    ]
             },
             series : [
                 {
@@ -84,11 +88,9 @@
                     radius : '55%',
                     center: ['50%', '60%'],
                     data:[
-                        {value:25, name:'Autre'},
-                        {value:10, name:'Bete'},
-                        {value:30, name:'Dioula'},
-                        {value:30, name:'Baoule'},
-                        {value:5, name:'Lobi'}
+                        {% for item in pops %}
+                            {value:"{{ item.nombre_hbitants }}", name:"{{ item.nom }}"},
+                        {% endfor %}
                     ],
                     itemStyle: {
                         emphasis: {
